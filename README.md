@@ -1,116 +1,134 @@
-# LangGraph Agent - Research Assistant
+# LangGraph Agent - Your AI Research Companion
 
-A powerful research assistant built with LangGraph that performs comprehensive research on user queries by dynamically generating search terms, querying the web using Google Search, reflecting on results to identify knowledge gaps, and iteratively refining searches until it can provide well-supported answers with citations.
+Transform the way you research with this intelligent AI agent that doesn't just search—it thinks, reflects, and delivers comprehensive answers backed by real sources. Built with cutting-edge LangGraph technology, this research assistant goes beyond simple web searches to provide you with thoughtful, well-researched responses to any question.
 
 <img src="./app.png" title="LangGraph Agent" alt="LangGraph Agent" width="90%">
 
-## Features
+## What Makes This Special
 
-- 💬 Fullstack application with a React frontend and LangGraph backend
-- 🧠 Powered by a LangGraph agent for advanced research and conversational AI
-- 🔍 Dynamic search query generation using Google Gemini models
-- 🌐 Integrated web research via Google Search API
-- 🤔 Reflective reasoning to identify knowledge gaps and refine searches
-- 📄 Generates answers with citations from gathered sources
-- 🔄 Hot-reloading for both frontend and backend during development
+- 🧠 **Intelligent Research**: Unlike basic search engines, this agent thinks critically about your questions and generates multiple search strategies
+- 🔍 **Smart Search**: Dynamically creates search queries and uses Google Search to find the most relevant information
+- 🤔 **Self-Reflection**: The agent analyzes its own findings, identifies gaps in knowledge, and refines its search approach
+- 📚 **Source-Cited Answers**: Every response comes with proper citations from the web sources used
+- ⚡ **Real-Time Processing**: Watch as the agent works through your research question step by step
+- 🎨 **Beautiful Interface**: Clean, modern React frontend that makes research feel effortless
 
-## Project Structure
+## Project Architecture
 
-The project is divided into two main directories:
+This is a full-stack application with two main components:
 
--   `frontend/`: Contains the React application built with Vite
--   `backend/`: Contains the LangGraph/FastAPI application, including the research agent logic
+-   **Frontend** (`frontend/`): A sleek React application built with Vite, featuring real-time updates and a modern UI
+-   **Backend** (`backend/`): A powerful LangGraph agent that handles all the intelligent research logic
 
-## Getting Started: Development and Local Testing
+## Quick Start Guide
 
-Follow these steps to get the application running locally for development and testing.
+Get your research assistant up and running in minutes.
 
-**1. Prerequisites:**
+### Prerequisites
 
--   Node.js and npm (or yarn/pnpm)
--   Python 3.11+
--   **`GEMINI_API_KEY`**: The backend agent requires a Google Gemini API key.
-    1.  Navigate to the `backend/` directory.
-    2.  Create a file named `.env` by copying the `backend/.env.example` file.
-    3.  Open the `.env` file and add your Gemini API key: `GEMINI_API_KEY="YOUR_ACTUAL_API_KEY"`
+You'll need:
+- Node.js and npm (or yarn/pnpm)
+- Python 3.11 or higher
+- A Google Gemini API key (get one from [Google AI Studio](https://aistudio.google.com/))
 
-**2. Install Dependencies:**
+### Setup Steps
 
-**Backend:**
+**1. Configure Your API Key**
 
+Navigate to the backend directory and set up your environment:
+```bash
+cd backend
+cp .env.example .env
+```
+
+Then edit the `.env` file and add your Gemini API key:
+```
+GEMINI_API_KEY="your_actual_api_key_here"
+```
+
+**2. Install Dependencies**
+
+Set up the backend:
 ```bash
 cd backend
 pip install .
 ```
 
-**Frontend:**
-
+Set up the frontend:
 ```bash
 cd frontend
 npm install
 ```
 
-**3. Run Development Servers:**
+**3. Launch Your Research Assistant**
 
-**Backend & Frontend:**
-
+From the project root, run:
 ```bash
 make dev
 ```
-This will run the backend and frontend development servers. Open your browser and navigate to the frontend development server URL (e.g., `http://localhost:5173/app`).
 
-_Alternatively, you can run the backend and frontend development servers separately. For the backend, open a terminal in the `backend/` directory and run `langgraph dev`. The backend API will be available at `http://127.0.0.1:2024`. It will also open a browser window to the LangGraph UI. For the frontend, open a terminal in the `frontend/` directory and run `npm run dev`. The frontend will be available at `http://localhost:5173`._
+This starts both the backend and frontend servers. Open your browser to `http://localhost:5173/app` and start researching!
 
-## How the Backend Agent Works (High-Level)
+*Alternative: Run servers individually*
+- Backend: `cd backend && langgraph dev` (available at `http://127.0.0.1:2024`)
+- Frontend: `cd frontend && npm run dev` (available at `http://localhost:5173`)
 
-The core of the backend is a LangGraph agent defined in `backend/src/agent/graph.py`. It follows these steps:
+## How the Magic Happens
+
+The research agent works through a sophisticated process defined in `backend/src/agent/graph.py`:
 
 <img src="./agent.png" title="Agent Flow" alt="Agent Flow" width="50%">
 
-1.  **Generate Initial Queries:** Based on your input, it generates a set of initial search queries using a Gemini model.
-2.  **Web Research:** For each query, it uses the Gemini model with the Google Search API to find relevant web pages.
-3.  **Reflection & Knowledge Gap Analysis:** The agent analyzes the search results to determine if the information is sufficient or if there are knowledge gaps. It uses a Gemini model for this reflection process.
-4.  **Iterative Refinement:** If gaps are found or the information is insufficient, it generates follow-up queries and repeats the web research and reflection steps (up to a configured maximum number of loops).
-5.  **Finalize Answer:** Once the research is deemed sufficient, the agent synthesizes the gathered information into a coherent answer, including citations from the web sources, using a Gemini model.
+1. **Question Analysis**: Your question gets analyzed and broken down into multiple search strategies
+2. **Intelligent Search**: The agent generates search queries and scours the web for relevant information
+3. **Critical Thinking**: It reflects on what it found, identifying what's missing or unclear
+4. **Iterative Refinement**: If needed, it generates follow-up searches to fill knowledge gaps
+5. **Synthesis**: Finally, it weaves everything together into a coherent, well-cited answer
 
-## CLI Example
+## Command Line Research
 
-For quick one-off questions you can execute the agent from the command line. The
-script `backend/examples/cli_research.py` runs the LangGraph agent and prints the
-final answer:
+Want to test the agent quickly? Use the command line interface:
 
 ```bash
 cd backend
-python examples/cli_research.py "What are the latest trends in renewable energy?"
+python examples/cli_research.py "What are the latest developments in quantum computing?"
 ```
 
-## Deployment
+Perfect for quick research questions without opening the full interface.
 
-In production, the backend server serves the optimized static frontend build. LangGraph requires a Redis instance and a Postgres database. Redis is used as a pub-sub broker to enable streaming real time output from background runs. Postgres is used to store assistants, threads, runs, persist thread state and long term memory, and to manage the state of the background task queue with 'exactly once' semantics. For more details on how to deploy the backend server, take a look at the [LangGraph Documentation](https://langchain-ai.github.io/langgraph/concepts/deployment_options/). Below is an example of how to build a Docker image that includes the optimized frontend build and the backend server and run it via `docker-compose`.
+## Deploying Your Research Assistant
 
-_Note: For the docker-compose.yml example you need a LangSmith API key, you can get one from [LangSmith](https://smith.langchain.com/settings)._
+Ready to take your research assistant live? Here's how to deploy it in production.
 
-_Note: If you are not running the docker-compose.yml example or exposing the backend server to the public internet, you should update the `apiUrl` in the `frontend/src/App.tsx` file to your host. Currently the `apiUrl` is set to `http://localhost:8123` for docker-compose or `http://localhost:2024` for development._
+The production setup uses Docker and requires Redis and PostgreSQL for optimal performance. Redis handles real-time streaming, while PostgreSQL stores conversation history and agent state.
 
-**1. Build the Docker Image:**
+**Build and Deploy:**
 
-   Run the following command from the **project root directory**:
+1. **Create the Docker Image:**
    ```bash
    docker build -t langgraph-agent -f Dockerfile .
    ```
-**2. Run the Production Server:**
 
+2. **Launch with Docker Compose:**
    ```bash
-   GEMINI_API_KEY=<your_gemini_api_key> LANGSMITH_API_KEY=<your_langsmith_api_key> docker-compose up
+   GEMINI_API_KEY=<your_key> LANGSMITH_API_KEY=<your_langsmith_key> docker-compose up
    ```
 
-Open your browser and navigate to `http://localhost:8123/app/` to see the application. The API will be available at `http://localhost:8123`.
+*Note: You'll need a LangSmith API key for production deployment. Get one from [LangSmith](https://smith.langchain.com/settings).*
 
-## Technologies Used
+Your research assistant will be available at `http://localhost:8123/app/`
 
-- [React](https://reactjs.org/) (with [Vite](https://vitejs.dev/)) - For the frontend user interface
-- [Tailwind CSS](https://tailwindcss.com/) - For styling
-- [Shadcn UI](https://ui.shadcn.com/) - For components
-- [LangGraph](https://github.com/langchain-ai/langgraph) - For building the backend research agent
-- [Google Gemini](https://ai.google.dev/models/gemini) - LLM for query generation, reflection, and answer synthesis
+## Tech Stack
+
+This project leverages the best modern technologies:
+
+- **Frontend**: React with Vite for lightning-fast development
+- **Styling**: Tailwind CSS for beautiful, responsive design
+- **Components**: Shadcn UI for polished, accessible components
+- **Backend**: LangGraph for sophisticated AI agent orchestration
+- **AI Models**: Google Gemini for intelligent text generation and reasoning
+
+## License
+
+This project is licensed under the Apache License 2.0. See the [LICENSE](LICENSE) file for details.
 
