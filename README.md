@@ -1,25 +1,25 @@
-# Gemini Fullstack LangGraph Quickstart
+# LangGraph Agent - Research Assistant
 
-This project demonstrates a fullstack application using a React frontend and a LangGraph-powered backend agent. The agent is designed to perform comprehensive research on a user's query by dynamically generating search terms, querying the web using Google Search, reflecting on the results to identify knowledge gaps, and iteratively refining its search until it can provide a well-supported answer with citations. This application serves as an example of building research-augmented conversational AI using LangGraph and Google's Gemini models.
+A powerful research assistant built with LangGraph that performs comprehensive research on user queries by dynamically generating search terms, querying the web using Google Search, reflecting on results to identify knowledge gaps, and iteratively refining searches until it can provide well-supported answers with citations.
 
-<img src="./app.png" title="Gemini Fullstack LangGraph" alt="Gemini Fullstack LangGraph" width="90%">
+<img src="./app.png" title="LangGraph Agent" alt="LangGraph Agent" width="90%">
 
 ## Features
 
-- 💬 Fullstack application with a React frontend and LangGraph backend.
-- 🧠 Powered by a LangGraph agent for advanced research and conversational AI.
-- 🔍 Dynamic search query generation using Google Gemini models.
-- 🌐 Integrated web research via Google Search API.
-- 🤔 Reflective reasoning to identify knowledge gaps and refine searches.
-- 📄 Generates answers with citations from gathered sources.
-- 🔄 Hot-reloading for both frontend and backend during development.
+- 💬 Fullstack application with a React frontend and LangGraph backend
+- 🧠 Powered by a LangGraph agent for advanced research and conversational AI
+- 🔍 Dynamic search query generation using Google Gemini models
+- 🌐 Integrated web research via Google Search API
+- 🤔 Reflective reasoning to identify knowledge gaps and refine searches
+- 📄 Generates answers with citations from gathered sources
+- 🔄 Hot-reloading for both frontend and backend during development
 
 ## Project Structure
 
 The project is divided into two main directories:
 
--   `frontend/`: Contains the React application built with Vite.
--   `backend/`: Contains the LangGraph/FastAPI application, including the research agent logic.
+-   `frontend/`: Contains the React application built with Vite
+-   `backend/`: Contains the LangGraph/FastAPI application, including the research agent logic
 
 ## Getting Started: Development and Local Testing
 
@@ -57,7 +57,7 @@ npm install
 ```bash
 make dev
 ```
-This will run the backend and frontend development servers.    Open your browser and navigate to the frontend development server URL (e.g., `http://localhost:5173/app`).
+This will run the backend and frontend development servers. Open your browser and navigate to the frontend development server URL (e.g., `http://localhost:5173/app`).
 
 _Alternatively, you can run the backend and frontend development servers separately. For the backend, open a terminal in the `backend/` directory and run `langgraph dev`. The backend API will be available at `http://127.0.0.1:2024`. It will also open a browser window to the LangGraph UI. For the frontend, open a terminal in the `frontend/` directory and run `npm run dev`. The frontend will be available at `http://localhost:5173`._
 
@@ -84,7 +84,6 @@ cd backend
 python examples/cli_research.py "What are the latest trends in renewable energy?"
 ```
 
-
 ## Deployment
 
 In production, the backend server serves the optimized static frontend build. LangGraph requires a Redis instance and a Postgres database. Redis is used as a pub-sub broker to enable streaming real time output from background runs. Postgres is used to store assistants, threads, runs, persist thread state and long term memory, and to manage the state of the background task queue with 'exactly once' semantics. For more details on how to deploy the backend server, take a look at the [LangGraph Documentation](https://langchain-ai.github.io/langgraph/concepts/deployment_options/). Below is an example of how to build a Docker image that includes the optimized frontend build and the backend server and run it via `docker-compose`.
@@ -97,7 +96,7 @@ _Note: If you are not running the docker-compose.yml example or exposing the bac
 
    Run the following command from the **project root directory**:
    ```bash
-   docker build -t gemini-fullstack-langgraph -f Dockerfile .
+   docker build -t langgraph-agent -f Dockerfile .
    ```
 **2. Run the Production Server:**
 
@@ -109,12 +108,9 @@ Open your browser and navigate to `http://localhost:8123/app/` to see the applic
 
 ## Technologies Used
 
-- [React](https://reactjs.org/) (with [Vite](https://vitejs.dev/)) - For the frontend user interface.
-- [Tailwind CSS](https://tailwindcss.com/) - For styling.
-- [Shadcn UI](https://ui.shadcn.com/) - For components.
-- [LangGraph](https://github.com/langchain-ai/langgraph) - For building the backend research agent.
-- [Google Gemini](https://ai.google.dev/models/gemini) - LLM for query generation, reflection, and answer synthesis.
+- [React](https://reactjs.org/) (with [Vite](https://vitejs.dev/)) - For the frontend user interface
+- [Tailwind CSS](https://tailwindcss.com/) - For styling
+- [Shadcn UI](https://ui.shadcn.com/) - For components
+- [LangGraph](https://github.com/langchain-ai/langgraph) - For building the backend research agent
+- [Google Gemini](https://ai.google.dev/models/gemini) - LLM for query generation, reflection, and answer synthesis
 
-## License
-
-This project is licensed under the Apache License 2.0. See the [LICENSE](LICENSE) file for details. 
