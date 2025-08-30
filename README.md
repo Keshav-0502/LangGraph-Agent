@@ -128,7 +128,3 @@ This project leverages the best modern technologies:
 - **Backend**: LangGraph for sophisticated AI agent orchestration
 - **AI Models**: Google Gemini for intelligent text generation and reasoning
 
-## License
-
-This project is licensed under the Apache License 2.0. See the [LICENSE](LICENSE) file for details.
-
