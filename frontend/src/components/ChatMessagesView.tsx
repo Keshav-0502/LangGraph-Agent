@@ -38,14 +38,14 @@ const mdComponents = {
     </h3>
   ),
   p: ({ className, children, ...props }: MdComponentProps) => (
-    <p className={cn("mb-3 leading-7", className)} {...props}>
+    <p className={cn("mb-3 leading-7 break-words", className)} {...props}>
       {children}
     </p>
   ),
   a: ({ className, children, href, ...props }: MdComponentProps) => (
-    <Badge className="text-xs mx-0.5">
+    <Badge className="text-xs mx-0.5 inline-block">
       <a
-        className={cn("text-blue-400 hover:text-blue-300 text-xs", className)}
+        className={cn("text-blue-400 hover:text-blue-300 text-xs break-all", className)}
         href={href}
         target="_blank"
         rel="noopener noreferrer"
@@ -95,7 +95,7 @@ const mdComponents = {
   pre: ({ className, children, ...props }: MdComponentProps) => (
     <pre
       className={cn(
-        "bg-neutral-900 p-3 rounded-lg overflow-x-auto font-mono text-xs my-3",
+        "bg-neutral-900 p-3 rounded-lg overflow-x-auto font-mono text-xs my-3 break-words",
         className
       )}
       {...props}
@@ -147,7 +147,7 @@ const HumanMessageBubble: React.FC<HumanMessageBubbleProps> = ({
 }) => {
   return (
     <div
-      className={`text-white rounded-3xl break-words min-h-7 bg-neutral-700 max-w-[100%] sm:max-w-[90%] px-4 pt-3 rounded-br-lg`}
+      className={`text-white rounded-3xl break-words min-h-7 bg-neutral-700 max-w-[85%] md:max-w-[80%] px-4 pt-3 rounded-br-lg`}
     >
       <ReactMarkdown components={mdComponents}>
         {typeof message.content === "string"
@@ -187,7 +187,7 @@ const AiMessageBubble: React.FC<AiMessageBubbleProps> = ({
   const isLiveActivityForThisBubble = isLastMessage && isOverallLoading;
 
   return (
-    <div className={`relative break-words flex flex-col`}>
+    <div className={`relative break-words flex flex-col max-w-[85%] md:max-w-[80%]`}>
       {activityForThisBubble && activityForThisBubble.length > 0 && (
         <div className="mb-3 border-b border-neutral-700 pb-3 text-xs">
           <ActivityTimeline
@@ -255,7 +255,7 @@ export function ChatMessagesView({
   return (
     <div className="flex flex-col h-full">
       <ScrollArea className="flex-1 overflow-y-auto" ref={scrollAreaRef}>
-        <div className="p-4 md:p-6 space-y-2 max-w-4xl mx-auto pt-16">
+        <div className="p-4 md:p-6 space-y-2 max-w-6xl mx-auto pt-16 w-full">
           {messages.map((message, index) => {
             const isLast = index === messages.length - 1;
             return (
